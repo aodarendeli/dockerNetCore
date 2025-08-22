@@ -1,0 +1,65 @@
+# Build sonuçları
+bin/
+obj/
+out/
+
+# Rider / VS / VS Code
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Log dosyaları
+*.log
+logs/
+
+# Kestrel / IIS / Web sunucusu dosyaları
+.project
+.project.lock.json
+project.lock.json
+artifacts/
+
+# NuGet paketleri
+*.nupkg
+*.snupkg
+*.nuspec
+*.psmdcp
+packages/
+# Paket cache
+.nuget/
+**/packages/*
+!**/packages/build/
+
+# Publish çıktısı
+publish/
+wwwroot/dist/
+node_modules/
+
+# Environment / config
+*.env
+*.local.json
+appsettings.*.json
+
+# Kullanıcı dosyaları
+*.swp
+*.bak
+*.tmp
+*.orig
+*.dbmdl
+*.jfm
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Docker
+docker-compose.override.yml
