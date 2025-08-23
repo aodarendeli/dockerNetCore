@@ -1,12 +1,20 @@
-# .NET 9 runtime ve SDK kullan
+# .NET 8 runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 5000
+ENV ASPNETCORE_URLS=http://+:5000
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
+
+# Proje dosyası ve restore
 COPY ["api.csproj", "./"]
 RUN dotnet restore "./api.csproj"
+
+# 🔑 Buraya .env'i kopyala
+COPY .env ./
+
+# Kaynak kodları kopyala ve build et
 COPY . .
 WORKDIR "/src/."
 RUN dotnet build "api.csproj" -c Release -o /app/build
@@ -16,5 +24,9 @@ RUN dotnet publish "api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
+
+# Publish edilen dosyaları kopyala
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "api.dll"]
+
+# ENTRYPOINT
+ENTRYPOINT ["dotnet", "api.dll", "--urls", "http://+:5000"]
